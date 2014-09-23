@@ -1174,8 +1174,9 @@ class WirelessDaemon(dbus.service.Object, object):
     def GetCurrentNetworkID(self, iwconfig=None):
         """ Returns the id of the current network, or -1 if its not found. """
         currentESSID = self.GetCurrentNetwork(iwconfig)
+        currentBSSID = self.GetApBssid()
         for x in xrange(0, len(self.LastScan)):
-            if self.LastScan[x]['essid'] == currentESSID:
+            if self.LastScan[x]['essid'] == currentESSID and self.LastScan[x]['bssid'] == currentBSSID:
                 return x
         if self.debug_mode:
             print 'GetCurrentNetworkID: Returning -1, current network not found'
