@@ -532,7 +532,10 @@ class WiredComboBox(ComboBox):
     def get_selected_profile(self):
         """Get the selected wired profile"""
         loc = self.get_focus()[1]
-        return self.theList[loc]
+        if len(self.theList) > loc:
+            return self.theList[loc]
+        else:
+            return self.theList[-1]
 
 
 class AdHocDialog(Dialog2):
